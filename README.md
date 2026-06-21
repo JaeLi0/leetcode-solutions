@@ -27,8 +27,8 @@
 
 | 专题 | 已完成 | 题目 |
 |------|--------|------|
-| Two Pointers | 3 | 11, 42, 167 |
-| Sliding Window | 3 | 3, 424, 1004 |
+| [Two Pointers](topics/two-pointers.md) | 3 | [11](), [42](solutions/0001-0100/0042-trapping-rain-water/), [167]() |
+| Sliding Window | 3 | [3](), [424](), [1004]() |
 | Hash Table | 0 | |
 | Binary Tree | 0 | |
 | Dynamic Programming | 0 | |
