@@ -216,8 +216,6 @@ class Solution3:
 
 ### notes.md 模板（复习面）
 
-参考 `.codex/skills/leetcode-teach-and-archive/SKILL.md` 中的模板部分。
-
 notes.md 的 front matter 字段：
 
 ```yaml
@@ -227,13 +225,72 @@ title: Trapping Rain Water
 difficulty: Hard
 tags: [two-pointers, dynamic-programming]
 created: 2026-06-21
-reviewed:
+reviewed: []
+mastery: 复习中
+pass: 1
 recommended: 双指针
 ---
 ```
 
-- `reviewed` 字段初始为空，第二遍复习时填入日期
+- `reviewed`：初始为空数组，每次复习后追加日期，如 `[2026-08-01, 2026-10-15]`
+- `mastery`：三个状态 — `待复习` / `复习中` / `熟练`
+- `pass`：当前刷到第几遍
 - notes.md 保留完整教学内容：过渡链条、逐行图解、易错点、关联题、追问洞察
+
+notes.md 文件结构（按顺序）：
+
+```markdown
+# 题号. 英文题名 — 中文题名
+
+**难度** | [LeetCode CN](链接) | `tag1` `tag2`
+
+---
+
+## Problem
+
+英文原题描述（含 Example 和 Constraints）
+
+---
+
+## 优化链条
+
+复杂度对比表 + 一段话说明优化路径
+
+---
+
+## ⭐ 推荐解（解法名）
+
+核心思路 + [!TIP] callout + 代码 + 复杂度 + 逐行图解
+
+---
+
+<details>
+<summary>次优解（辅助理解，点击展开）</summary>
+...
+</details>
+
+<details>
+<summary>暴力解（点击展开）</summary>
+...
+</details>
+
+---
+
+## 易错点
+
+用 [!WARNING] / [!NOTE] callout 格式
+
+---
+
+## 关联题目
+```
+
+**格式规范：**
+- 逐行图解必须放在 ` ```text ` 代码块内（等宽字体，图对齐）
+- 推荐解用 `> [!TIP]` 标注核心洞察
+- 易错点用 `> [!WARNING]` 或 `> [!NOTE]`
+- 次优解和暴力解用 `<details>` 折叠
+- GitHub 支持的 callout 类型：`[!NOTE]` `[!TIP]` `[!WARNING]` `[!IMPORTANT]`
 
 ### 质量检查（生成前自检）
 
