@@ -1,7 +1,7 @@
 # LeetCode Solutions 知识库
 
 > CC 在本项目中承担双重角色：**LeetCode 教学** + **笔记归档**。
-> 用户问一道题 → CC 讲解 → 多轮讨论后用户说「整理」→ 生成 solution.py + notes.md → commit + push。
+> 用户问一道题 → CC 讲解 → 多轮讨论后用户说「整理」→ 生成 solution.md → commit + push。
 
 ---
 
@@ -13,8 +13,7 @@ leetcode-solutions/
 ├── solutions/
 │   ├── 0001-0100/
 │   │   └── 0042-trapping-rain-water/
-│   │       ├── solution.py            # 面试展示面：干净代码
-│   │       └── notes.md               # 复习面：详细思路 + 图解
+│   │       └── solution.md            # 一题一文件：完整思路 + 多解法 + 图解
 │   ├── 0101-0200/
 │   └── ...
 ├── topics/                            # 算法专题笔记
@@ -35,18 +34,11 @@ leetcode-solutions/
 └── README.md                          # 进度总览
 ```
 
-### 每道题两个文件，各有分工
+### 每道题一个文件：solution.md
 
-**`solution.py`**（面试官看这个）：
-- 推荐解放最上面，其余解法依次往下
-- 代码干净专业，注释简洁（一行复杂度 + 关键步骤短注释）
-- 不写教学语气、不写「你可能会想」「暴力哪里慢」
-- 面试官打开就能看到思路清晰、代码规范
-
-**`notes.md`**（你自己复习看这个）：
-- 保留完整教学内容：过渡链条、逐行图解、易错点、关联题
-- 包含多轮讨论中的追问洞察和纠错内容
-- 教学语气没关系，这是你的私人笔记
+- 一题一个 `solution.md`，包含完整内容：题目描述、优化链条、多解法、推荐解逐行图解、易错点、关联题
+- 保留完整教学内容：过渡链条、逐行图解、易错点、关联题，以及多轮讨论中的追问洞察和纠错
+- 用中文写，是面向自己复习的笔记（LeetCode 上已有可提交代码，这里不再单独维护 .py 文件）
 
 ### 文件命名规则
 
@@ -160,63 +152,11 @@ class Solution:
 - 「下一题」（先归档当前题，再进入下一题）
 - 「commit」「push」「提交」
 
-触发后，CC 将整个对话中关于该题的所有内容（包括追问、纠错、补充的洞察）整合，**同时生成 solution.py 和 notes.md 两个文件**。
+触发后，CC 将整个对话中关于该题的所有内容（包括追问、纠错、补充的洞察）整合，**生成单个 `solution.md` 文件**。
 
-### solution.py 模板（面试展示面）
+### solution.md 模板
 
-```python
-"""
-42. Trapping Rain Water | Hard
-https://leetcode.cn/problems/trapping-rain-water/
-Tags: two-pointers, dynamic-programming
-"""
-
-# ⭐ 解法一：双指针（推荐）
-# 时间 O(n) — 左右指针各走一遍 | 空间 O(1) — 四个变量
-class Solution:
-    def trap(self, height: list[int]) -> int:
-        left, right = 0, len(height) - 1
-        left_max = right_max = 0
-        res = 0
-        while left < right:
-            if height[left] < height[right]:
-                if height[left] >= left_max:
-                    left_max = height[left]
-                else:
-                    res += left_max - height[left]
-                left += 1
-            else:
-                if height[right] >= right_max:
-                    right_max = height[right]
-                else:
-                    res += right_max - height[right]
-                right -= 1
-        return res
-
-# 解法二：前缀最大值数组
-# 时间 O(n) — 三次遍历 | 空间 O(n) — 两个数组
-class Solution2:
-    def trap(self, height: list[int]) -> int:
-        ...
-
-# 解法三：暴力
-# 时间 O(n²) — 每个位置扫左右 | 空间 O(1)
-class Solution3:
-    def trap(self, height: list[int]) -> int:
-        ...
-```
-
-**solution.py 规则：**
-- 推荐解永远放最上面，用 ⭐ 标注
-- 每个解法一个 class（Solution, Solution2, Solution3...）
-- 注释只写一行复杂度（含消耗来源），不写教学内容
-- 关键步骤可加短注释，但不要大段解释
-- 不出现「你可能会想」「暴力哪里慢」等教学语气
-- 代码必须可直接提交到 LeetCode（Solution 类格式）
-
-### notes.md 模板（复习面）
-
-notes.md 的 front matter 字段：
+solution.md 的 front matter 字段：
 
 ```yaml
 ---
@@ -235,9 +175,9 @@ recommended: 双指针
 - `reviewed`：初始为空数组，每次复习后追加日期，如 `[2026-08-01, 2026-10-15]`
 - `mastery`：三个状态 — `待复习` / `复习中` / `熟练`
 - `pass`：当前刷到第几遍
-- notes.md 保留完整教学内容：过渡链条、逐行图解、易错点、关联题、追问洞察
+- solution.md 保留完整教学内容：过渡链条、逐行图解、易错点、关联题、追问洞察
 
-notes.md 文件结构（按顺序）：
+solution.md 文件结构（按顺序）：
 
 ```markdown
 # 题号. 英文题名 — 中文题名
@@ -294,15 +234,12 @@ notes.md 文件结构（按顺序）：
 
 ### 质量检查（生成前自检）
 
-**solution.py：**
-- [ ] 推荐解在最上面
-- [ ] 每个解法都有复杂度（含消耗来源）
-- [ ] 代码可直接提交（class Solution 格式）
-- [ ] 无教学语气
-
-**notes.md：**
+**solution.md：**
 - [ ] front matter 字段齐全（id, title, difficulty, tags, created, recommended）
 - [ ] 题号和目录名一致
+- [ ] 推荐解在最上面，用 ⭐ 标注
+- [ ] 每个解法都有复杂度（含消耗来源）
+- [ ] 每个解法的代码可直接提交（class Solution 格式）
 - [ ] 解法之间有过渡说明
 - [ ] 推荐解有逐行图解
 - [ ] 暴力解已包含
@@ -335,12 +272,11 @@ docs(topics): link LC 0042 to two-pointers
 教学结束、用户触发归档后，按顺序执行：
 
 1. 创建题解目录 → `solutions/XXXX-XXXX/{题号}-{slug}/`
-2. 生成 `solution.py`（面试展示面）
-3. 生成 `notes.md`（复习面）
-4. 更新专题文件 → `topics/{专题}.md`
-5. `git add` 新增/修改的文件
-6. `git commit` 按上述规范
-7. `git push`
+2. 生成 `solution.md`
+3. 更新专题文件 → `topics/{专题}.md`
+4. `git add` 新增/修改的文件
+5. `git commit` 按上述规范
+6. `git push`
 
 如果 push 失败（网络问题等），告知用户手动 push，不要静默失败。
 
