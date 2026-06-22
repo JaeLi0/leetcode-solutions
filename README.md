@@ -76,4 +76,4 @@ Each `solution.md` is the heart of this repo — written for review, not just st
 - Sub-optimal and brute-force solutions kept in collapsible sections for reference
 - Common pitfalls and links to related problems
 
-The notes are written in Chinese (my working language for studying); code, tags, and structure are language-agnostic. The goal is simple: open a note six months later and immediately re-derive the solution without starting from scratch.
+The notes are written in Chinese; code, tags, and structure are language-agnostic. The goal is simple: open a note six months later and immediately re-derive the solution without starting from scratch.
